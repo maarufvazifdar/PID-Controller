@@ -29,51 +29,30 @@
  */
 
 double PID::getKp() {
-  return _Kp;
+  // TODO(Pair_A) : return Kp
   return 0;
 }
 
 double PID::getKi() {
-  return _Ki;
+  // TODO(Pair_A) : return Ki
   return 0;
 }
 
 double PID::getKd() {
-  return _Kd;
+  // TODO(Pair_A) : return Kd
   return 0;
 }
 
 double PID::getdt() {
-  return _dt;
+  // TODO(Pair_A) : return dt
   return 0;
 }
 
 double PID::calculatePID(double process_value, double set_point) {
-  // Calculate Error
-  double _error = set_point - process_value;
-
-  // Proportional term
-  double pTerm = _Kp * _error;
-
-  // Integral term
-  _integral += _error * _dt;
-  double iTerm = _Ki * _integral;
-
-  // Deravitive term
-  _derivative = _error - _prev_error;
-  double dTerm = _Kd * _derivative;
-
-  // Output value
-  double output = pTerm + iTerm + dTerm;
-
-  // Constraint the output value between min and max
-  if (output > _max)
-    output = _max;
-  else if (output < _min)
-    output = _min;
-
-  _prev_error = _error;
-  return output;
+  // TODO(Pair_A) : Check if dt <=o - throw domain error
+  // TODO(Pair_A) : Check if gain values <=0 - throw domain error
+  // TODO(Pair_A) : Implement PID logic
+  // TODO(Pair_A) : return output
   return 11;
 }
 

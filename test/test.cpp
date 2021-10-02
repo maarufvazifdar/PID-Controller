@@ -11,47 +11,47 @@
 #include <gtest/gtest.h>
 #include"../include/pid.hpp"
 
-// /**
-// * @brief Test for invalid sampling time
-// */
-// TEST(invaliddt, checkParameters) {
-//   EXPECT_THROW(PID pid(1, 1, 1, 0, 0, 0),std::domain_error);
-//   EXPECT_THROW(PID pid(1, 1, 1, -2, 0, 0),std::domain_error);
-// }
+/**
+* @brief Test for invalid sampling time
+*/
+TEST(invaliddt, checkParameters) {
+  EXPECT_THROW(PID pid(1, 1, 1, 0, 0, 0),std::domain_error);
+  EXPECT_THROW(PID pid(1, 1, 1, -2, 0, 0),std::domain_error);
+}
 
-// /**
-// * @brief Test for invalid gain parameters
-// */
-// TEST(invalidGains, checkParameters) {
-//   // invalid Kp
-//   EXPECT_THROW(PID pid(0, 1, 1, 1, 0, 0),std::domain_error);
-//   EXPECT_THROW(PID pid(-1, 1, 1, 2, 0, 0),std::domain_error);
+/**
+* @brief Test for invalid gain parameters
+*/
+TEST(invalidGains, checkParameters) {
+  // invalid Kp
+  EXPECT_THROW(PID pid(0, 1, 1, 1, 0, 0),std::domain_error);
+  EXPECT_THROW(PID pid(-1, 1, 1, 2, 0, 0),std::domain_error);
 
-//   // invalid Ki
-//   EXPECT_THROW(PID pid(1, 0, 1, 1, 0, 0),std::domain_error);
-//   EXPECT_THROW(PID pid(1, -1, 1, 2, 0, 0),std::domain_error);
+  // invalid Ki
+  EXPECT_THROW(PID pid(1, 0, 1, 1, 0, 0),std::domain_error);
+  EXPECT_THROW(PID pid(1, -1, 1, 2, 0, 0),std::domain_error);
 
-//   // invalid Kd
-//   EXPECT_THROW(PID pid(1, 1, 0, 1, 0, 0),std::domain_error);
-//   EXPECT_THROW(PID pid(1, 1, -1, 2, 0, 0),std::domain_error);
-// }
+  // invalid Kd
+  EXPECT_THROW(PID pid(1, 1, 0, 1, 0, 0),std::domain_error);
+  EXPECT_THROW(PID pid(1, 1, -1, 2, 0, 0),std::domain_error);
+}
 
-// /**
-// * @brief Test for valid gain parameters
-// */
-// TEST(validGains, checkParameters) {
-//   // valid Kp
-//   EXPECT_NO_THROW(PID pid(0, 1, 1, 1, 0, 0));
-//   EXPECT_NO_THROW(PID pid(-1, 1, 1, 2, 0, 0));
+/**
+* @brief Test for valid gain parameters
+*/
+TEST(validGains, checkParameters) {
+  // valid Kp
+  EXPECT_NO_THROW(PID pid(0, 1, 1, 1, 0, 0));
+  EXPECT_NO_THROW(PID pid(-1, 1, 1, 2, 0, 0));
 
-//   // valid Ki
-//   EXPECT_NO_THROW(PID pid(1, 0, 1, 1, 0, 0));
-//   EXPECT_NO_THROW(PID pid(1, -1, 1, 2, 0, 0));
+  // valid Ki
+  EXPECT_NO_THROW(PID pid(1, 0, 1, 1, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, -1, 1, 2, 0, 0));
 
-//   // valid Kd
-//   EXPECT_NO_THROW(PID pid(1, 1, 0, 1, 0, 0));
-//   EXPECT_NO_THROW(PID pid(1, 1, -1, 2, 0, 0));
-// }
+  // valid Kd
+  EXPECT_NO_THROW(PID pid(1, 1, 0, 1, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, 1, -1, 2, 0, 0));
+}
 
 /**
 * @brief Tests for checking PID Implementation
