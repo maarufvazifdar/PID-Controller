@@ -1,6 +1,6 @@
 # PID_Controller
 [![Build Status](https://app.travis-ci.com/maarufvazifdar/PID-Controller.svg?branch=develpoment)](https://app.travis-ci.com/maarufvazifdar/PID-Controller)
-[![Coverage Status](https://coveralls.io/repos/github/maarufvazifdar/PID-Controller/badge.svg?branch=development)](https://coveralls.io/github/maarufvazifdar/PID-Controller?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/maarufvazifdar/PID-Controller/badge.svg?branch=develpoment)](https://coveralls.io/github/maarufvazifdar/PID-Controller?branch=develpoment)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 ---
 
