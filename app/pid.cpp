@@ -40,40 +40,5 @@ double PID::calculatePID(double process_value, double set_point) {
   // TODO(Pair_A) : Implement PID logic
   // TODO(Pair_A) : return output
 
-  if (_Kp <= 0)
-    throw std::domain_error("Kp should be greater than 0.");
-  else if (_Ki <= 0)
-    throw std::domain_error("Ki should be positive.");
-  else if (_Kd <= 0)
-    throw std::domain_error("Kd should be positive.");
-  else if (_dt <= 0)
-    throw std::domain_error("Sample time should be positive.");
-
-  // Calculate Error
-  double _error = set_point - process_value;
-
-  // Proportional term
-  double pTerm = PID::getKp() * _error;
-
-  // Integral term
-  _integral += _error * _dt;
-  double iTerm = PID::getKi() * _integral;
-
-  // Deravitive term
-  _derivative = (_error - _prev_error) / PID::getdt();
-  double dTerm = PID::getKd() * _derivative;
-
-  // Output value
-  double output = pTerm + iTerm + dTerm;
-
-  // Constraint the output value between min and max
-  if (output > _max)
-    output = _max;
-  else if (output < _min)
-    output = _min;
-
-  _prev_error = _error;
-  return output;
-
-  // return 11;
+  return 11;
 }
