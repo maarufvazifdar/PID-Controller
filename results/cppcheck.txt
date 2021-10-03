@@ -1,11 +1,9 @@
 maaruf@maaruf-Strix-15-GL503GE:~/pid_ws/src/PID-Controller$ cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" )
 Checking app/main.cpp ...
-[include/pid.hpp:23]: (warning) Member variable 'PID::_error' is not initialized in the constructor.
-[include/pid.hpp:23]: (warning) Member variable 'PID::_derivative' is not initialized in the constructor.
-1/4 files checked 5% done
+1/4 files checked 6% done
 Checking app/pid.cpp ...
-2/4 files checked 43% done
+2/4 files checked 29% done
 Checking test/main.cpp ...
-3/4 files checked 49% done
+3/4 files checked 38% done
 Checking test/test.cpp ...
 4/4 files checked 100% done

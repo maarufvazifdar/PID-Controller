@@ -69,5 +69,5 @@ class PID {
    * Class local variables.
    */
   double _Kp, _Ki, _Kd, _dt, _max, _min;
-  double _error, _prev_error, _integral, _derivative;
+  double _prev_error, _integral;
 };
