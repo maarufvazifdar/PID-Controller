@@ -11,16 +11,6 @@
 #include<iostream>
 #include<pid.hpp>
 
-/** @brief  Constructor for the class PID to initialize all the 
- *          PID parameters.
- *  @param  double Kp, double Ki, double Kd, double dt, double max, double min
- *  @return void
- */
-
-// PID::PID(double Kp, double Ki, double Kd, double dt, double min, double max) {
-  
-// }
-
 /** @brief  A member function to calculate the PID values based on the current
  *          velocity and required velocity
  *  @param  cur_vel Current process value
@@ -29,23 +19,19 @@
  */
 
 double PID::getKp() {
-  // TODO(Pair_A) : return Kp
-  return 0;
+  return _Kp;
 }
 
 double PID::getKi() {
-  // TODO(Pair_A) : return Ki
-  return 0;
+  return _Ki;
 }
 
 double PID::getKd() {
-  // TODO(Pair_A) : return Kd
-  return 0;
+  return _Kd;
 }
 
 double PID::getdt() {
-  // TODO(Pair_A) : return dt
-  return 0;
+  return _dt;
 }
 
 double PID::calculatePID(double process_value, double set_point) {
@@ -53,20 +39,41 @@ double PID::calculatePID(double process_value, double set_point) {
   // TODO(Pair_A) : Check if gain values <=0 - throw domain error
   // TODO(Pair_A) : Implement PID logic
   // TODO(Pair_A) : return output
-  return 11;
-}
 
-/** @brief  A member function to update the PID parameters.
- *  @param  double Kp, double Ki, double Kd, double dt, double max, double min
- *  @return void
- */
+  if (_Kp <= 0)
+    throw std::domain_error("Kp should be greater than 0.");
+  else if (_Ki <= 0)
+    throw std::domain_error("Ki should be positive.");
+  else if (_Kd <= 0)
+    throw std::domain_error("Kd should be positive.");
+  else if (_dt <= 0)
+    throw std::domain_error("Sample time should be positive.");
 
-double PID::updateGains(double Kp, double Ki, double Kd, double dt, double min,
-                        double max) {
-  _Kp = Kp;
-  _Ki = Ki;
-  _Kd = Kd;
-  _dt = dt;
-  _min = min;
-  _max = max;
+  // Calculate Error
+  double _error = set_point - process_value;
+
+  // Proportional term
+  double pTerm = PID::getKp() * _error;
+
+  // Integral term
+  _integral += _error * _dt;
+  double iTerm = PID::getKi() * _integral;
+
+  // Deravitive term
+  _derivative = (_error - _prev_error) / PID::getdt();
+  double dTerm = PID::getKd() * _derivative;
+
+  // Output value
+  double output = pTerm + iTerm + dTerm;
+
+  // Constraint the output value between min and max
+  if (output > _max)
+    output = _max;
+  else if (output < _min)
+    output = _min;
+
+  _prev_error = _error;
+  return output;
+
+  // return 11;
 }
