@@ -15,8 +15,10 @@
 * @brief Test for invalid sampling time
 */
 TEST(invaliddt, checkParameters) {
-  EXPECT_THROW(PID pid(1, 1, 1, 0, 0, 0),std::domain_error);
-  EXPECT_THROW(PID pid(1, 1, 1, -2, 0, 0),std::domain_error);
+  PID pid1(1, 1, 1, 0, 0, 0);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
+  PID pid2(1, 1, 1, -1, 0, 0);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
 }
 
 /**
@@ -24,16 +26,22 @@ TEST(invaliddt, checkParameters) {
 */
 TEST(invalidGains, checkParameters) {
   // invalid Kp
-  EXPECT_THROW(PID pid(0, 1, 1, 1, 0, 0),std::domain_error);
-  EXPECT_THROW(PID pid(-1, 1, 1, 2, 0, 0),std::domain_error);
+  PID pid1(0, 1, 1, 1, 10, 10);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
+  PID pid2(-1, 1, 1, 1, 10, 10);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
 
   // invalid Ki
-  EXPECT_THROW(PID pid(1, 0, 1, 1, 0, 0),std::domain_error);
-  EXPECT_THROW(PID pid(1, -1, 1, 2, 0, 0),std::domain_error);
+  PID pid3(1, 0, 1, 1, 10, 10);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
+  PID pid4(1, -1, 1, 1, 10, 10);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
 
   // invalid Kd
-  EXPECT_THROW(PID pid(1, 1, 0, 1, 0, 0),std::domain_error);
-  EXPECT_THROW(PID pid(1, 1, -1, 2, 0, 0),std::domain_error);
+  PID pid5(1, 1, 0, 1, 10, 10);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
+  PID pid6(1, 1, -1, 1, 10, 10);
+  EXPECT_THROW(pid1.calculatePID(1, 5), std::domain_error);
 }
 
 /**
@@ -41,16 +49,16 @@ TEST(invalidGains, checkParameters) {
 */
 TEST(validGains, checkParameters) {
   // valid Kp
-  EXPECT_NO_THROW(PID pid(0, 1, 1, 1, 0, 0));
-  EXPECT_NO_THROW(PID pid(-1, 1, 1, 2, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, 1, 1, 1, 0, 0));
+  EXPECT_NO_THROW(PID pid(5, 1, 1, 2, 0, 0));
 
   // valid Ki
-  EXPECT_NO_THROW(PID pid(1, 0, 1, 1, 0, 0));
-  EXPECT_NO_THROW(PID pid(1, -1, 1, 2, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, 1, 1, 1, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, 5, 1, 2, 0, 0));
 
   // valid Kd
-  EXPECT_NO_THROW(PID pid(1, 1, 0, 1, 0, 0));
-  EXPECT_NO_THROW(PID pid(1, 1, -1, 2, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, 1, 1, 1, 0, 0));
+  EXPECT_NO_THROW(PID pid(1, 1, 5, 2, 0, 0));
 }
 
 /**
@@ -81,15 +89,4 @@ TEST(outputConstrain, test_constraints) {
   PID pid(10, 5, 30, 1.0, -10.0, 10.0);
   ASSERT_LE(pid.calculatePID(5, 25), 10);
   ASSERT_GE(pid.calculatePID(20, -2), -10);
-}
-
-/**
-* @brief Test for updateGains function
-*/
-TEST(updateGainsVerification, test_updateGains) {
-  PID pid (10, 5, 30, 0.1, -10.0, 10.0);
-  ASSERT_EQ(pid.getdt(), 0.1);
-  ASSERT_EQ(pid.getKp(), 10);
-  ASSERT_EQ(pid.getKi(), 5);
-  ASSERT_EQ(pid.getKd(), 30);
 }
