@@ -4,3 +4,12 @@ Done processing ./app/pid.cpp
 Done processing ./include/pid.hpp
 Done processing ./test/main.cpp
 Done processing ./test/test.cpp
+
+cpplint ../include/*
+Done processing ../include/pid.hpp
+
+cpplint ../app/* 
+Ignoring ../app/CMakeLists.txt; not a valid file name (hh, cxx, c, hpp, h, hxx, cpp, cu, cuh, c++, cc, h++)
+Done processing ../app/CMakeLists.txt
+Done processing ../app/main.cpp
+Done processing ../app/pid.cpp
