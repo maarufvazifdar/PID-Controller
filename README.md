@@ -5,9 +5,13 @@
 ---
 
 ## Authors
-Part B: 
+Pair B: 
 - Maaruf - Driver
 - Rishabh - Navigator
+
+Pair A:
+- Dani - Driver
+- Siddharth - Navigator
 ## Overview
 
 A program to compute PID values for a system.
