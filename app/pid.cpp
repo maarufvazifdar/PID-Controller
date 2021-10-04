@@ -36,15 +36,15 @@ double PID::getdt() {
 }
 
 double PID::calculatePID(double process_value, double set_point) {
-  if (_dt <= 0.0)
+  if (getdt() <= 0.0)
     throw std::domain_error("The delta t must be greater than zero");
-  else if (_Kp <= 0 || _Ki <= 0 || _Kd <= 0)
+  else if (getKp() <= 0 || getKi() <= 0 || getKd() <= 0)
     throw std::domain_error("Kp, Kd and Ki must be greater than zero");
 
   double error = set_point - process_value;
-  double derivative = (error - _prev_error) / _dt;
-  _integral += error*_dt;
-  double output = _Kp*error + _Ki*_integral + _Kd*derivative;
+  double derivative = (error - _prev_error) / getdt();
+  _integral += error*getdt();
+  double output = getKp()*error + getKi()*_integral + getKd()*derivative;
 
   _prev_error = error;
 
