@@ -8,8 +8,9 @@
  * Copyright [2021] <Pair B>
  */
 
-#include<iostream>
-#include<pid.hpp>
+#include <iostream>
+#include <stdexcept>
+#include <pid.hpp>
 
 /** @brief  A member function to calculate the PID values based on the current
  *          velocity and required velocity
@@ -35,10 +36,21 @@ double PID::getdt() {
 }
 
 double PID::calculatePID(double process_value, double set_point) {
-  // TODO(Pair_A) : Check if dt <=o - throw domain error
-  // TODO(Pair_A) : Check if gain values <=0 - throw domain error
-  // TODO(Pair_A) : Implement PID logic
-  // TODO(Pair_A) : return output
+  if (_dt <= 0.0)
+    throw std::domain_error("The delta t must be greater than zero");
+  else if (_Kp <= 0 || _Ki <= 0 || _Kd <= 0)
+    throw std::domain_error("Kp, Kd and Ki must be greater than zero");
 
-  return 11;
+  double error = set_point - process_value;
+  double derivative = (error - _prev_error) / _dt;
+  _integral += error*_dt;
+  double output = _Kp*error + _Ki*_integral + _Kd*derivative;
+
+  _prev_error = error;
+
+  if (output <= _min) output = _min;
+  else if (output >= _max) output = _max;
+
+  std::cout << "output = " << output << std::endl;
+  return output;
 }
