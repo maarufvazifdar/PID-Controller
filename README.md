@@ -30,7 +30,7 @@ Refer the UML diagram and the activity diagrams for a basic overview of the prog
 
 ## Standard install via command-line
 ```bash
-git clone -b development https://github.com/maarufvazifdar/PID-Controller
+git clone -b develp0ment https://github.com/maarufvazifdar/PID-Controller
 cd <path to repository>
 mkdir build
 cd build
